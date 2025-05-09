@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    padding: 20px;
+  }
+
+  .chat-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    padding: 20px;
+  }
+
+  .chat-header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .chat-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    height: 400px;
+    overflow-y: scroll;
+    background-color: #fdfdfd;
+    border-radius: 8px;
+  }
+
+  .message {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e0e0e0;
+  }
+
+  .message strong {
+    color: #2980b9;
+  }
+
+  .message small {
+    color: #888;
+    font-size: 12px;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+  }
+
+  button {
+    margin-top: 10px;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #777;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: #333;
+  }
+</style>
+
+<div class="chat-container">
+  <div class="chat-header">
+    Chat with {{ chat.user_name }}
+  </div>
+
+  <div class="chat-box">
+    {% for message in messages %}
+      <div class="message">
+        <strong>{{ message.sender_name }}</strong>: {{ message.chat.content }}<br>
+        <small>{{ message.chat.timestamp|date:"H:i d/m/Y" }}</small>
+      </div>
+    {% endfor %}
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+      <textarea id="messageInput" name="message" rows="3" placeholder="Type your message..."></textarea>
+    <button type="button" onclick="sendMessage()">Send</button>
+  </form>
+
+  <a href="{% url 'chat_index' %}" class="back-link">← Back to chats</a>
+</div>
+
+<script>
+  const chatId = "{{ chat.token_group }}";
+  const senderId = "{{ request.user.medic_profile.doctor_firebase_id }}";
+  const token = "{{ request.user.medic_profile.doctor_firebase_id }}";  // или что-то подобное
+  const chatSocket = new WebSocket(
+      'ws://' + window.location.host + '/ws/chat/' + chatId + '/?token=' + token
+  );
+  chatSocket.onopen = function() {
+    console.log("✅ WebSocket connected");
+  };
+
+  chatSocket.onerror = function(e) {
+      console.error("❌ WebSocket error", e);
+  };
+
+  chatSocket.onclose = function(e) {
+      console.log("🔌 WebSocket closed", e);
+  };
+
+  chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    const box = document.querySelector('.chat-box');
+    const newMessage = document.createElement('div');
+    newMessage.classList.add('message');
+    let sender_name = ""
+    if(data.sender_id == senderId) {
+        sender_name = "{{ medic_name }}"
+    }else {
+        sender_name = "{{ user_name }}"
+    }
+    newMessage.innerHTML = `<strong>${ sender_name }</strong>: ${data.content}`;
+    box.appendChild(newMessage);
+    box.scrollTop = box.scrollHeight;
+  };
+
+  function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const message = input.value;
+    chatSocket.send(JSON.stringify({
+      'message': message,
+      'sender_id': senderId,
+    }));
+    input.value = '';
+  }
+  window.onload = function() {
+      const box = document.querySelector('.chat-box');
+      box.scrollTop = box.scrollHeight;
+  };
+</script>
+{% endblock %}

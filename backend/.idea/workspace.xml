@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a029c502-65bb-4fed-b1dd-33a300566a43" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/model/entity/SessionDB.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/appointments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/chat/chat.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/chat/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/schedule.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/consumers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/routing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/health-clinic-logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auyrma/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/model/api/DrApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/model/api/DrApi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/FavoriteListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/FavoriteListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/SessionDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/SessionDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLite3" beforeDir="false" afterPath="$PROJECT_DIR$/SQLite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yermakhan05&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Yermakhan05/Android-Final.git&quot;,
+    &quot;accountId&quot;: &quot;e2f7acf8-3b02-4b27-b999-ae9fb8ed0152&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2q9qaaQp6jLvdIRB2uG3WQ1rlHN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.backend.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_chat.test_chat_flow.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_chat_flow.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/yermakhankasymzhomart/Desktop/3 - course/fall/Android/Android-Final/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/api/templates/chat" />
+      <recent name="$PROJECT_DIR$/chat" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.backend">
+    <configuration name="backend" type="Python.DjangoServer" factoryName="Django server">
+      <module name="backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="backend.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for chat.test_chat.test_chat_flow" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chat" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;chat.test_chat.test_chat_flow&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_chat.test_chat_flow" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chat" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_chat.test_chat_flow&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_chat.test_chat_flow" />
+        <item itemvalue="Python tests.Python tests for chat.test_chat.test_chat_flow" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a029c502-65bb-4fed-b1dd-33a300566a43" name="Changes" comment="" />
+      <created>1734085203023</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734085203023</updated>
+      <workItem from="1734085204047" duration="1198000" />
+      <workItem from="1734166542512" duration="482000" />
+      <workItem from="1734170303657" duration="346000" />
+      <workItem from="1734175931269" duration="7845000" />
+      <workItem from="1734451003731" duration="3007000" />
+      <workItem from="1734700050778" duration="4530000" />
+      <workItem from="1734760980461" duration="9700000" />
+      <workItem from="1736331657317" duration="414000" />
+      <workItem from="1738056557080" duration="109000" />
+      <workItem from="1738056669303" duration="42000" />
+      <workItem from="1738056975942" duration="370000" />
+      <workItem from="1738057359883" duration="1378000" />
+      <workItem from="1740352676790" duration="622000" />
+      <workItem from="1740471009825" duration="49000" />
+      <workItem from="1741681507453" duration="1562000" />
+      <workItem from="1741684327787" duration="2101000" />
+      <workItem from="1744100016069" duration="2452000" />
+      <workItem from="1744103310608" duration="1759000" />
+      <workItem from="1744556043636" duration="2792000" />
+      <workItem from="1744560369499" duration="17103000" />
+      <workItem from="1744690882747" duration="9431000" />
+      <workItem from="1744703730528" duration="4333000" />
+      <workItem from="1744710989859" duration="132000" />
+      <workItem from="1745759716922" duration="16000" />
+      <workItem from="1745760122417" duration="1406000" />
+      <workItem from="1746693234488" duration="3511000" />
+      <workItem from="1746707215657" duration="7571000" />
+      <workItem from="1746795513691" duration="1148000" />
+      <workItem from="1746796683225" duration="31000" />
+      <workItem from="1746796787961" duration="230000" />
+      <workItem from="1746797145231" duration="21013000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/backend$.coverage" NAME=" Coverage Results" MODIFIED="1746709344381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chat" />
+  </component>
+</project>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Schedule - Health Clinic{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Schedule</h1>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold">Upcoming schedule</h2>
+    </div>
+    
+    <div class="schedule-timeline">
+        {% for hour in schedule_hours %}
+        <div class="time-slot">
+            <div class="time-marker"></div>
+            <div class="text-sm text-gray-500">{{ hour.time }}</div>
+        </div>
+        
+        {% for appointment in hour.appointments %}
+        <div class="appointment-item {% if appointment.active %}active{% endif %}">
+            <div class="text-sm text-gray-500">{{ appointment.time }} {{ appointment.title }}</div>
+            {% if appointment.details %}
+            <div class="mt-2">
+                <div class="text-sm"><span class="font-medium">Patient:</span> {{ appointment.patient_name }}</div>
+                <div class="text-sm"><span class="font-medium">Time:</span> {{ appointment.start_time }} - {{ appointment.end_time }}</div>
+                <div class="text-sm"><span class="font-medium">Purpose:</span> {{ appointment.purpose }}</div>
+            </div>
+            {% endif %}
+            
+            {% if appointment.has_action %}
+            <div class="mt-2">
+                <button class="bg-blue-500 text-white text-xs px-3 py-1 rounded">Begin appointment</button>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

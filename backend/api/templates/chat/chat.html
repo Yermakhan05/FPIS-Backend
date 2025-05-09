@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9fb;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  ul.chat-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  ul.chat-list li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+
+  ul.chat-list li:hover {
+    background-color: #eef3fa;
+  }
+
+  ul.chat-list a {
+    text-decoration: none;
+    color: #34495e;
+    font-weight: bold;
+    display: block;
+  }
+
+  .no-chat {
+    text-align: center;
+    color: #888;
+    margin-top: 30px;
+  }
+</style>
+
+<h2>My Chats</h2>
+
+<ul class="chat-list">
+  {% for chat in chats %}
+    <li>
+      <a href="{% url 'chat_detail' chat.chat.id %}">
+        {{ chat.user_name }} <br>
+        <small>{{ chat.created_at|date:"SHORT_DATETIME_FORMAT" }}</small>
+      </a>
+    </li>
+  {% empty %}
+    <li class="no-chat">No chats yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

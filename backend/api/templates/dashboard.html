@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Health Clinic{% endblock %}
+
+{% block content %}
+<div class="mt-auto pt-8">
+                <div class="flex items-center p-4 border-t border-gray-200">
+                    <img src="{{ doctor.medic_image }}" alt="Doctor" class="h-10 w-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-medium">{{ doctor.medic_name }}</p>
+                        <p class="text-xs text-gray-500">{{ doctor.speciality }}</p>
+                    </div>
+                </div>
+</div>
+
+<div class="grid grid-cols-3 gap-6 mb-8">
+    <!-- Appointments Stat -->
+    <div class="stat-card">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="text-lg font-medium text-gray-700">Appointments</h2>
+            <button class="text-gray-400">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+        </div>
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-3xl font-bold">{{ appointments.count }}</h3>
+            </div>
+            <div class="stat-icon green-bg">
+                <i class="far fa-calendar-check green-text"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hours Stat -->
+    <div class="stat-card">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="text-lg font-medium text-gray-700">Hours</h2>
+            <button class="text-gray-400">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+        </div>
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-3xl font-bold">{{ total_hours }}hr</h3>
+            </div>
+            <div class="stat-icon yellow-bg">
+                <i class="far fa-clock yellow-text"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Surgery Stat -->
+    <div class="stat-card">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="text-lg font-medium text-gray-700">Patient</h2>
+            <button class="text-gray-400">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+        </div>
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-3xl font-bold">{{ appointments.count }}</h3>
+            </div>
+            <div class="stat-icon orange-bg">
+                <i class="fas fa-stethoscope orange-text"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold">Appointments</h2>
+        <a href="{% url 'appointments' %}" class="text-blue-500 text-sm">View All</a>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="min-w-full">
+            <thead>
+                <tr>
+                    <th class="table-header">Visit No.</th>
+                    <th class="table-header">Patient Name</th>
+                    <th class="table-header">Gender</th>
+                    <th class="table-header">Reason</th>
+                    <th class="table-header">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td class="table-cell">{{ appointment.id }}</td>
+                    <td class="table-cell">{{ appointment.client.full_name }}</td>
+                    <td class="table-cell">{{ appointment.client.gender }} Male</td>
+                    <td class="table-cell">{{ appointment.notes }}</td>
+                    <td class="table-cell">
+                        <button class="consult-btn">Consult</button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="table-cell text-center text-gray-500">No appointments found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold">Upcoming schedule</h2>
+        <a href="{% url 'schedule' %}" class="text-blue-500 text-sm">View All</a>
+    </div>
+    
+    <div class="schedule-timeline">
+        {% for hour in schedule_hours %}
+        <div class="time-slot">
+            <div class="time-marker"></div>
+            <div class="text-sm text-gray-500">{{ hour.time }}</div>
+        </div>
+
+        {% for appointment in hour.appointments %}
+        <div class="appointment-item {% if appointment.active %}active{% endif %}">
+            <div class="text-sm text-gray-500">{{ appointment.time }} {{ appointment.title }}</div>
+            {% if appointment.details %}
+            <div class="mt-2">
+                <div class="text-sm"><span class="font-medium">Patient:</span> {{ appointment.patient_name }}</div>
+                <div class="text-sm"><span class="font-medium">Time:</span> {{ appointment.start_time }} - {{ appointment.end_time }}</div>
+                <div class="text-sm"><span class="font-medium">Purpose:</span> {{ appointment.purpose }}</div>
+            </div>
+            {% endif %}
+
+            {% if appointment.has_action %}
+            <div class="mt-2">
+                <button class="bg-blue-500 text-white text-xs px-3 py-1 rounded">Begin appointment</button>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
