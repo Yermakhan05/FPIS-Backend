@@ -5,7 +5,6 @@
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f7fa;
-    padding: 20px;
   }
 
   .chat-container {
@@ -63,7 +62,7 @@
     font-size: 14px;
   }
 
-  button {
+  #sendBtn {
     margin-top: 10px;
     background-color: #3498db;
     color: white;
@@ -74,7 +73,7 @@
     transition: 0.3s;
   }
 
-  button:hover {
+  #sendBtn:hover {
     background-color: #2980b9;
   }
 
@@ -108,7 +107,7 @@
   <form method="post">
     {% csrf_token %}
       <textarea id="messageInput" name="message" rows="3" placeholder="Type your message..."></textarea>
-    <button type="button" onclick="sendMessage()">Send</button>
+    <button id="sendBtn" type="button" onclick="sendMessage()">Send</button>
   </form>
 
   <a href="{% url 'chat_index' %}" class="back-link">← Back to chats</a>

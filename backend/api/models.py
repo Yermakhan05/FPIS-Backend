@@ -98,11 +98,11 @@ class Sessions(models.Model):
     fid = models.CharField(max_length=128, unique=True, null=True)
 
     def __str__(self):
-        return f"{self.medics.medic_name} ({self.medics.speciality}) with {self.client.client_name}"
+        return f"{self.medics.medic_name} ({self.medics.speciality}) with {self.client.full_name}"
 
 
 class Consultation(models.Model):
-    appointment = models.OneToOneField(Sessions, on_delete=models.CASCADE, related_name='consultation')
+    appointment = models.ForeignKey(Sessions, on_delete=models.CASCADE, related_name='consultation')
     diagnosis = models.TextField()
     treatment = models.TextField()
     prescription = models.TextField(blank=True, null=True)
@@ -114,9 +114,17 @@ class Consultation(models.Model):
 
 class Document(models.Model):
     title = models.CharField(max_length=100)
-    patient = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='documents')
+    patient = models.ForeignKey(FirebaseUser, on_delete=models.CASCADE, related_name='documents')
     file = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.title} - {self.patient.name}"
+        return f"{self.title} - {self.patient.full_name}"
+
+
+class Notification(models.Model):
+    doctor = models.ForeignKey(Medics, on_delete=models.CASCADE, related_name="notifications")
+    title = models.CharField(max_length=255)
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)

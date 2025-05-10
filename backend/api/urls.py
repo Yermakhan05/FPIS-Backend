@@ -42,4 +42,8 @@ urlpatterns = [
     path('chats/', views.chat_index, name='chat_index'),
     path('chat/<int:chat_id>/', views.chat_detail, name='chat_detail'),
     path('logout/', views.logout_view, name='logout'),
+
+    path('consultation/create/', views.create_consultation, name='create_consultation'),
+    path('documents/<int:document_id>/download/', views.download_document, name='download_document'),
+    path('documents/<str:fid>/', views.list_documents, name='list_documents'),
 ]

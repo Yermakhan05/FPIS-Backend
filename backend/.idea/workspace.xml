@@ -5,37 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a029c502-65bb-4fed-b1dd-33a300566a43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/model/entity/SessionDB.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/appointments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/chat/chat.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/chat/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/schedule.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chat/consumers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chat/middleware.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chat/routing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/health-clinic-logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auyrma/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/model/api/DrApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/model/api/DrApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/FavoriteListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/FavoriteListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/SessionDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Auyrma/app/src/main/java/com/example/auyrma/view/fragment/SessionDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e0b7c8fe-4627-4f46-8279-26bec25ce2c8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e0b7c8fe-4627-4f46-8279-26bec25ce2c8.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQLite3" beforeDir="false" afterPath="$PROJECT_DIR$/SQLite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/appointments.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/appointments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/chat/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/chat/chat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/chat/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/chat/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/asgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +46,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Yermakhan05/Android-Final.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/Yermakhan05/FPIS-Backend.git&quot;,
     &quot;accountId&quot;: &quot;e2f7acf8-3b02-4b27-b999-ae9fb8ed0152&quot;
   }
 }</component>
@@ -87,7 +72,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/yermakhankasymzhomart/Desktop/3 - course/fall/Android/Android-Final/backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/yermakhankasymzhomart/Desktop/FPIS-Backend/backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -98,10 +83,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api/templates" />
+      <recent name="$PROJECT_DIR$/static/images" />
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/api/templates/chat" />
-      <recent name="$PROJECT_DIR$/chat" />
     </key>
   </component>
   <component name="RunManager" selected="Django Server.backend">
@@ -216,6 +202,10 @@
       <workItem from="1746796683225" duration="31000" />
       <workItem from="1746796787961" duration="230000" />
       <workItem from="1746797145231" duration="21013000" />
+      <workItem from="1746864017033" duration="971000" />
+      <workItem from="1746866332615" duration="16351000" />
+      <workItem from="1746883465697" duration="59000" />
+      <workItem from="1746883665825" duration="1798000" />
     </task>
     <servers />
   </component>

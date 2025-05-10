@@ -1,36 +1,162 @@
-from social_core.pipeline import user
+import io
+from datetime import datetime
 
-from .models import Medics, Sessions, Client, Hospital, Pharmacy, FirebaseUser, Message
-from .serializer import MedicsSerializer, SessionsSerializer, ClientSerializer, HospitalSerializer, PharmacySerializer, \
-    SessionsSerializer2, ChatGroupSerializer, MessageSerializer, SessionsSerializer3
+from django.contrib.staticfiles import finders
+from django.core.files.base import ContentFile
+from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
+from reportlab.pdfgen import canvas
+
+from .models import *
+from .serializer import *
 from rest_framework.pagination import PageNumberPagination
-from django.db.models import Q
 from django.utils.dateparse import parse_datetime
 from rest_framework.views import APIView
 from rest_framework import status
 from django.utils.dateparse import parse_date
 from django.db.models.functions import TruncTime
 from django import forms
-from django.contrib.auth.models import User
-from .models import Medics
 from django.contrib.auth import authenticate, login
 
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import ChatGroup
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from .models import Client, Sessions, Consultation, Message, Document
+from django.contrib.auth import logout
+from svglib.svglib import svg2rlg
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q, Max, Count, Prefetch
+from django.db.models import Q
 from django.utils import timezone
-from .models import ChatGroup, Message
+from django.http import JsonResponse
+from django.http import FileResponse, Http404
+from django.urls import reverse
+from io import BytesIO
+from django.utils.timezone import now
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
+from reportlab.lib import colors
+
+def download_document(request, document_id):
+    try:
+        document = Document.objects.get(id=document_id)
+
+        return FileResponse(document.file.open('rb'), content_type='application/pdf', filename=document.file.name)
+    except Document.DoesNotExist:
+        raise Http404("Document not found")
+
+def list_documents(request, fid):
+    docs = Document.objects.filter(patient__uid=fid)
+    data = [
+        {
+            "id": doc.id,
+            "title": doc.title,
+            "uploaded_at": doc.uploaded_at.strftime('%Y-%m-%d %H:%M'),
+            "download_url": request.build_absolute_uri(
+                reverse('download_document', args=[doc.id])
+            )
+        } for doc in docs
+    ]
+    return JsonResponse(data, safe=False)
+
+@csrf_exempt
+@login_required
+def create_consultation(request):
+    if request.method == 'POST':
+        appointment_id = request.POST.get('appointment_id')
+        diagnosis = request.POST.get('diagnosis')
+        treatment = request.POST.get('treatment')
+        prescription = request.POST.get('prescription')
+        follow_up_date = request.POST.get('follow_up_date') or None
+
+        session = Sessions.objects.get(id=appointment_id)
+        if follow_up_date:
+            follow_up_date = datetime.strptime(follow_up_date, "%Y-%m-%d").date()
+        else:
+            follow_up_date = None
+
+        # затем создаём consultation и рендерим
+        consultation = Consultation.objects.create(
+            appointment=session,
+            diagnosis=diagnosis,
+            treatment=treatment,
+            prescription=prescription,
+            follow_up_date=follow_up_date
+        )
+        buffer = render_consultation_pdf(session, diagnosis, treatment, prescription, consultation.follow_up_date)
+
+        pdf_file = ContentFile(buffer.read())
+        file_name = f"consultation_summary_{session.client.id}_{now().strftime('%Y%m%d%H%M%S')}.pdf"
+
+        # Создаем ContentFile
+        pdf_content = ContentFile(buffer.getvalue())
+        # Задаем имя
+        pdf_content.name = file_name
+
+        # Создаем объект без файла
+        document = Document.objects.create(
+            title="Consultation Summary",
+            patient=session.client,
+        )
+
+        # Сохраняем файл отдельно
+        document.file.save(file_name, pdf_content)
+        document.save()
+
+        return JsonResponse({'status': 'success'})
+
+
+def render_consultation_pdf(session, diagnosis, treatment, prescription, follow_up_date):
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4,
+                            rightMargin=40, leftMargin=40,
+                            topMargin=60, bottomMargin=40)
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(
+        name='ConsultationTitle',
+        fontSize=18,
+        leading=22,
+        spaceAfter=14,
+    ))
+
+    story = [
+        Paragraph("Consultation Summary", styles['ConsultationTitle']),
+        Paragraph(f"<b>Patient:</b> {session.client.full_name}", styles['Normal']),
+        Spacer(1, 12),
+        Paragraph("<b>Diagnosis:</b>", styles['Heading3']),
+        Paragraph(diagnosis, styles['Normal']),
+        Spacer(1, 8),
+        Paragraph("<b>Treatment:</b>", styles['Heading3']),
+        Paragraph(treatment, styles['Normal']),
+        Spacer(1, 8),
+        Paragraph("<b>Prescription:</b>", styles['Heading3']),
+        Paragraph(prescription, styles['Normal']),
+        Spacer(1, 20),
+    ]
+
+    # follow_up_date здесь либо объект date, либо None
+    date_str = follow_up_date.strftime('%Y-%m-%d') if follow_up_date else '—'
+    data = [
+        ['Дата создания', now().strftime('%Y-%m-%d %H:%M')],
+        ['Дата следующего приёма', date_str],
+    ]
+    tbl = Table(data, hAlign='LEFT', colWidths=[120, 200])
+    tbl.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('BOX',       (0, 0), (-1, -1), 0.5, colors.grey),
+        ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.grey),
+        ('VALIGN',    (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+    story.append(tbl)
+
+
+    doc.build(story)
+    buffer.seek(0)
+    return buffer
+
+
 
 
 @login_required
@@ -92,13 +218,19 @@ def chat_detail(request, chat_id):
 def dashboard(request):
     today = timezone.now().date()
 
+    doctor = Medics.objects.get(user=request.user)
+
     # Get today's appointments
-    appointments = Sessions.objects.all()
+    appointments = Sessions.objects.filter(medics_id=doctor.id)
 
     # Get appointment statistics
-    total_appointments = Sessions.objects.filter(appointment=today).count()
+    total_appointments = Sessions.objects.filter(
+        appointment__date=today
+    ).count()
     previous_day = today - timezone.timedelta(days=1)
-    previous_appointments = Sessions.objects.filter(appointment=previous_day).count()
+    previous_appointments = Sessions.objects.filter(
+        appointment__date=previous_day
+    ).count()
 
     if previous_appointments > 0:
         appointment_change = ((total_appointments - previous_appointments) / previous_appointments) * 100
@@ -106,13 +238,15 @@ def dashboard(request):
         appointment_change = 0
 
     # Calculate total hours of appointments
-    total_hours = 1  # Placeholder, calculate actual hours based on appointment durations
+    total_hours = appointments.count() * 1
 
     # Get surgery count
     surgery_count = 2  # Placeholder, get actual surgery count
 
     # Generate schedule hours
-    schedule_hours = generate_schedule_hours(today)
+    schedule_hours = generate_schedule_hours(today, request)
+
+    notifications = Notification.objects.filter(doctor=doctor, is_read=False).order_by('-created_at')[:10]
 
     if request.user.is_authenticated:
         doctor = Medics.objects.filter(user=request.user.id).first()
@@ -124,7 +258,8 @@ def dashboard(request):
             'total_hours': total_hours,
             'surgery_count': surgery_count,
             'schedule_hours': schedule_hours,
-            'doctor': doctor
+            'doctor': doctor,
+            'notifications': notifications,
         }
 
         return render(request, 'dashboard.html', context)
@@ -134,11 +269,22 @@ def dashboard(request):
 
 @login_required
 def appointments_view(request):
-    appointments = Sessions.objects.all().select_related('client').order_by('appointment')
+    doctor = Medics.objects.get(user=request.user)
+    search_query = request.GET.get('search', '').strip()
+
+    appointments = Sessions.objects.filter(medics_id=doctor.id).select_related('client')
+
+    if search_query:
+        appointments = appointments.filter(
+            Q(client__full_name__icontains=search_query)
+        )
+
+    appointments = appointments.order_by('appointment')
 
     context = {
         'active_page': 'appointments',
         'appointments': appointments,
+        'search_query': search_query,
     }
 
     return render(request, 'appointments.html', context)
@@ -147,7 +293,7 @@ def appointments_view(request):
 @login_required
 def schedule_view(request):
     today = timezone.now().date()
-    schedule_hours = generate_schedule_hours(today)
+    schedule_hours = generate_schedule_hours(today, request)
 
     context = {
         'active_page': 'schedule',
@@ -159,26 +305,28 @@ def schedule_view(request):
 
 
 
-# Helper function to generate schedule hours
-def generate_schedule_hours(date):
-
+def generate_schedule_hours(date, request):
     schedule_hours = []
 
-    appointments = Sessions.objects.all()
+    doctor = Medics.objects.get(user=request.user)
+    appointments = Sessions.objects.filter(medics_id=doctor.id).select_related('client')
 
     appointments_data = [{
-            'time': a.appointment,
-            'title': 'Consultation-'+a.client.full_name,
-            'active': False,
-            'details': False,
-            'has_action': False
-        }
-        for a in appointments]
+        'time': a.appointment,
+        'title': f'Consultation - {a.client.full_name}',
+        'active': False,
+        'details': False,
+        'has_action': False
+    } for a in appointments if a.appointment is not None]
 
     hours = ['6:00', '8:00', '9:00', '10:00', '11:00', '12:00']
 
     for hour in hours:
-        hour_appointments = [a for a in appointments_data if a['time']]
+        hour_time = timezone.datetime.combine(date, datetime.strptime(hour, "%H:%M").time())
+        hour_appointments = [
+            a for a in appointments_data
+            if a['time'] is not None and a['time'].hour == hour_time.hour and a['time'].date() == date
+        ]
         schedule_hours.append({
             'time': hour,
             'appointments': hour_appointments
@@ -186,9 +334,6 @@ def generate_schedule_hours(date):
 
     return schedule_hours
 
-
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 
 def logout_view(request):
     logout(request)
@@ -272,7 +417,7 @@ def medic_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None and hasattr(user, 'medic_profile'):
             login(request, user)
-            return render(request, 'dashboard.html')
+            return redirect('dashboard')
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials or not a doctor'})
     return render(request, 'login.html')
@@ -442,6 +587,11 @@ def sessions_list(request):
         serializer = SessionsSerializer2(data=session_data)
         if serializer.is_valid():
             serializer.save()
+            Notification.objects.create(
+                doctor=medic,
+                title="New Appointment",
+                message=f"You have a new appointment with {client.full_name} on {appointment.strftime('%Y-%m-%d %H:%M')}"
+            )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
